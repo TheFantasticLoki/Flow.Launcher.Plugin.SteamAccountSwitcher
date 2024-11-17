@@ -6,8 +6,7 @@
     "Author":"aburakayaz",
     "Version":"1.0.2",
     "Language":"python",
-    "Website":"https://github.com/aburakayaz/Wox.Plugin.SteamAccountSwitcher",
+    "Website":"https://github.com/cibere/Flow.Launcher.Plugin.SteamAccountSwitcher",
     "IcoPath":"Images\\app.png",
-    "ExecuteFileName":"switcher.py",
-    "Disabled": true
+    "ExecuteFileName":"switcher.py"
 }

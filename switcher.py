@@ -1,12 +1,17 @@
-# -*- coding: utf-8 -*-
+import sys
+from pathlib import Path
 
-from wox import Wox
+plugindir = Path.absolute(Path(__file__).parent)
+paths = (".", "lib", "plugin")
+sys.path = [str(plugindir / p) for p in paths] + sys.path
+
+from flowlauncher import FlowLauncher 
 import os
 import xml.etree.ElementTree as ET
 import re
 
 
-class SteamAccountSwitcher(Wox):
+class SteamAccountSwitcher(FlowLauncher):
 
     # query is default function to receive realtime keystrokes from wox launcher
     def query(self, query):
