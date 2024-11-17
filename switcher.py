@@ -17,8 +17,8 @@ class SteamAccountSwitcher(FlowLauncher):
     def query(self, query):
         results = []
         steam_profiles = []
-        xml_path = os.path.expanduser("~/Documents/TcNo Account Switcher/LoginCache/Steam/VACCache")
-        avatar_path = os.path.expanduser("~/Documents/TcNo Account Switcher/wwwroot/img/profiles/steam")
+        xml_path = os.path.expanduser(r"%appdata%\\TcNo Account Switcher\\LoginCache\\Steam\\VACCache")
+        avatar_path = os.path.expanduser(r"%appdata%\\TcNo Account Switcher\\wwwroot\\img\\profiles\\steam")
         for file in os.listdir(xml_path):
             if file.endswith(".xml"):
                 file_path = os.path.join(xml_path, file)
