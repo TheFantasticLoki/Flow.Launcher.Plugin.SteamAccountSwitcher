@@ -17,8 +17,8 @@ class SteamAccountSwitcher(FlowLauncher):
     def query(self, query):
         results = []
         steam_profiles = []
-        xml_path = os.path.expanduser(r"%appdata%\\TcNo Account Switcher\\LoginCache\\Steam\\VACCache")
-        #avatar_path = os.path.expanduser(r"%appdata%\\TcNo Account Switcher\\wwwroot\\img\\profiles\\steam")
+        xml_path = os.path.expandvars(r"%appdata%\TcNo Account Switcher\LoginCache\Steam\VACCache")
+        avatar_path = os.path.expandvars(r"%appdata%\TcNo Account Switcher\wwwroot\img\profiles\steam")
         for file in os.listdir(xml_path):
             if file.endswith(".xml"):
                 file_path = os.path.join(xml_path, file)
@@ -28,7 +28,7 @@ class SteamAccountSwitcher(FlowLauncher):
                 steam_profiles.append({
                     "steamId": profile.find("steamID").text,
                     "steamId64": steamId64,
-                    #"avatarIcon": os.path.join(avatar_path, steamId64 + ".jpg"),
+                    "avatarIcon": os.path.join(avatar_path, steamId64 + ".jpg"),
                 })
         for stm in steam_profiles:
             if not re.search(query, stm["steamId"], re.IGNORECASE):
@@ -36,7 +36,7 @@ class SteamAccountSwitcher(FlowLauncher):
             results.append({
                 "Title": stm["steamId"],
                 "SubTitle": stm["steamId64"],
-                #"IcoPath": stm["avatarIcon"],
+                "IcoPath": stm["avatarIcon"],
                 "JsonRPCAction": {
                     "method": "switch",
                     "parameters": [stm["steamId64"]],
@@ -46,7 +46,11 @@ class SteamAccountSwitcher(FlowLauncher):
         return results
 
     def switch(self, steamId64):
-        os.system("\"C:/Program Files/TcNo Account Switcher/Steam/TcNo Account Switcher Steam.exe\" +" + steamId64)
+        folder = "C:/Program Files/TcNo Account Switcher/"
+        cmd = (
+            f'cd "{folder}" && "TcNo-Acc-Switcher.exe" "+s:{steamId64}"'
+        )
+        os.system(cmd)
         return None
 
 if __name__ == "__main__":
